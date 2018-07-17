@@ -4,3 +4,6 @@
 [submodule "avdecc-lib"]
 	path = avdecc-lib
 	url = ../../AVnu/avdecc-lib
+[submodule "lib/igb"]
+	path = lib/igb
+	url = https://github.com/avinash-palleti/libigb

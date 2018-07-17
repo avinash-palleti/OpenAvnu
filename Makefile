@@ -9,9 +9,8 @@ help:
 	@echo ''
 	@echo '  lib               - igb library'
 	@echo ''
-	@echo '  daemons_all       - build all daemons (mrpd gptp maap shaper)'
+	@echo '  daemons_all       - build all daemons (mrpd maap shaper)'
 	@echo '  mrpd              - mrpd daemon'
-	@echo '  gptp              - gptp daemon for linux'
 	@echo '  maap              - maap daemon'
 	@echo '  shaper            - shaper daemon for linux'
 	@echo ''
@@ -35,11 +34,6 @@ help:
 	@echo '  clean: a summary clean target to clean _all_ folders'
 	@echo ''
 
-igb: FORCE
-	$(call descend,kmod/$@)
-
-igb_clean:
-	$(call descend,kmod/igb/,clean)
 
 lib: FORCE
 	$(call descend,lib/igb)
@@ -55,12 +49,6 @@ mrpd:
 mrpd_clean:
 	$(call descend,daemons/mrpd/,clean)
 
-gptp:
-	$(call descend,daemons/$@/linux/build/)
-
-gptp_clean:
-	$(call descend,daemons/gptp/linux/build/,clean)
-
 maap:
 	$(call descend,daemons/$@/linux/build/)
 
@@ -73,9 +61,9 @@ shaper:
 shaper_clean:
 	$(call descend,daemons/shaper/,clean)
 
-daemons_all: mrpd maap gptp shaper
+daemons_all: mrpd maap shaper
 
-daemons_all_clean: mrpd_clean gptp_clean maap_clean shaper_clean
+daemons_all_clean: mrpd_clean maap_clean shaper_clean
 
 examples_common:
 	$(call descend,examples/common)
@@ -155,8 +143,8 @@ examples_all: examples_common simple_talker simple_listener mrp_client live_stre
 examples_all_clean: examples_common_clean simple_talker_clean simple_listener_clean mrp_client_clean \
 	jackd-talker_clean jackd-listener_clean live_stream_clean simple_rx_clean
 
-all: igb lib daemons_all examples_all avtp_pipeline avtp_avdecc
+all: lib daemons_all examples_all avtp_pipeline avtp_avdecc
 
-clean: igb_clean lib_clean daemons_all_clean examples_all_clean avtp_pipeline_clean avtp_avdecc_clean
+clean: lib_clean daemons_all_clean examples_all_clean avtp_pipeline_clean avtp_avdecc_clean
 
 .PHONY: FORCE
