@@ -5,8 +5,6 @@ descend = \
 help:
 	@echo 'Possible targets:'
 	@echo ''
-	@echo '  igb               - igb module'
-	@echo ''
 	@echo '  lib               - igb library'
 	@echo ''
 	@echo '  daemons_all       - build all daemons (mrpd maap shaper)'
@@ -36,11 +34,11 @@ help:
 
 
 lib: FORCE
-	$(call descend,lib/igb)
+	$(call descend,lib/igb_avb/lib)
 	$(call descend,lib/common)
 
 lib_clean:
-	$(call descend,lib/igb/,clean)
+	$(call descend,lib/igb_avb/lib/,clean)
 	$(call descend,lib/common/,clean)
 
 mrpd:
